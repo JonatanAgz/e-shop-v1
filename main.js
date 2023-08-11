@@ -100,7 +100,8 @@ function renderShoppingCart(e){
     productCartCloseIcon.setAttribute('src', './icons/icon_close.png');
     productCartCloseIcon.classList.add('close-item');
     productCartCloseIcon.addEventListener('click', deleteItemShoppingCart);
-
+    productCartCloseIcon.addEventListener('click', shoppingCartReduce);
+    
     productCartFigure.append(productCartImg);
     productCartItem.append(productCartFigure);
     productCartItem.append(productCartFigure, productCartName, productCartPrice, productCartCloseIcon);
@@ -211,6 +212,7 @@ function detailProduct(e){
         
         const precioProducto = document.querySelector('.product-price');
         precioProducto.innerText = e.target.nextElementSibling.innerText;
+        console.log(precioProducto);
 
         // const nombreProducto = document.querySelector('.product-name');
         // nombreProducto.innerText = e.target.nextElementSibling.innerText;
