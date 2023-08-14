@@ -10,7 +10,10 @@ const btnCloseDetails = document.querySelector('.product-detail-close');
 const displayMenuIcon = document.querySelector('.icon-display-menu');
 const shoppingCartCounter = document.querySelector('.counter');
 const shoppingCartOrderContent = document.querySelector('.my-order-content');
+const totalPriceShoppingCart = document.querySelector('.total-price');
+
 let counter = 0;
+let idCounter = 0;
 
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
@@ -69,12 +72,13 @@ function shoppingCartReduce(){
     shoppingCartCounter.innerText = counter -=1;
 }
 
-function deleteItemShoppingCart(){
-    const productCartItem = document.querySelector('.shopping-cart-item');
-    productCartItem.remove() 
+const deleteItemShoppingCart = (id)=>{
+    const productCartItem = document.getElementById(id);
+    productCartItem.remove(id);
+    console.log(productCartItem);
 }
 
-function renderShoppingCart(e){
+const renderShoppingCart = (product)=>{
     // <div class="shopping-cart-item">
     //     <figure>
     //         <img src="https://www.popsci.com/uploads/2020/07/07/AOYRPGQSKJHM3LEJUQDXGOH374-1024x768.jpg" alt="bike" />
@@ -83,23 +87,27 @@ function renderShoppingCart(e){
     //     <p>$ 49.99</p>
     //     <img src="/icons/icon_close.png" alt="close" />
     // </div>
+    idCounter++;
 
     const productCartItem = document.createElement('div');
     productCartItem.classList.add('shopping-cart-item');
+    productCartItem.setAttribute('id', idCounter);
 
     const productCartFigure = document.createElement('figure');
 
     const productCartImg = document.createElement('img');
-    productCartImg.setAttribute('src', "https://www.popsci.com/uploads/2020/07/07/AOYRPGQSKJHM3LEJUQDXGOH374-1024x768.jpg");
+    productCartImg.setAttribute('src', product.image);
 
     const productCartName = document.createElement('p');
-    productCartName.innerText = "prueba";
+    productCartName.textContent = product.name;
     const productCartPrice = document.createElement('p');
-    productCartPrice.innerText = "$550";
+    productCartPrice.textContent = product.price;
     const productCartCloseIcon = document.createElement('img');
     productCartCloseIcon.setAttribute('src', './icons/icon_close.png');
     productCartCloseIcon.classList.add('close-item');
-    productCartCloseIcon.addEventListener('click', deleteItemShoppingCart);
+    productCartCloseIcon.addEventListener('click', ()=>{
+        deleteItemShoppingCart(productCartItem.id);
+    });
     productCartCloseIcon.addEventListener('click', shoppingCartReduce);
     
     productCartFigure.append(productCartImg);
@@ -107,7 +115,14 @@ function renderShoppingCart(e){
     productCartItem.append(productCartFigure, productCartName, productCartPrice, productCartCloseIcon);
     shoppingCartOrderContent.append(productCartItem);
 
+    console.log(productCartItem.id);
 
+    updateTotalPrice(product.price);
+}
+
+const updateTotalPrice = (productPrice) => {
+    totalPriceShoppingCart.innerText = (productPrice+=1);
+    console.log(productPrice);
 }
 
 const productList = [];
@@ -136,15 +151,17 @@ productList.push({
     image: "https://rascalrides.com/wp-content/uploads/park-cycles-14-inch-pedal-bike-1024x678.jpg"
 });
 
-function listProducts(arr){
-    for (product of arr){
+function listProducts(productList){
+    productList.forEach(product =>{
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
     
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
         productImg.addEventListener('click', detailProduct);
-        productImg.addEventListener('click', openProductDetail);
+        productImg.addEventListener('click', ()=>{
+            openProductInfo(product);
+        });
     
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
@@ -160,7 +177,9 @@ function listProducts(arr){
         shoppingCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
         shoppingCartIcon.classList.add('shopping-btn');
         shoppingCartIcon.addEventListener('click', shoppingCartCount);
-        shoppingCartIcon.addEventListener('click', renderShoppingCart);
+        shoppingCartIcon.addEventListener('click', ()=>{
+            renderShoppingCart(product);
+        });
         
         shoppingIconContainer.appendChild(shoppingCartIcon);
         
@@ -171,7 +190,7 @@ function listProducts(arr){
         productCard.append(productImg, productInfo);
         
         cardsContainer.appendChild(productCard);
-    }
+    });
 }
 
 listProducts(productList);
@@ -203,6 +222,22 @@ listProducts(productList);
         </div>
     </aside>
     */
+
+const openProductInfo = (product)=>{
+    const productDetails = document.querySelector('.product-details');
+    const productImg = document.querySelector('.product-image');
+    const productPrice = document.querySelector('.product-price');
+    const productName = document.querySelector('.product-name');
+
+    productDetails.classList.remove('inactive');
+
+    productImg.setAttribute('src', product.image);
+    productPrice.textContent = product.price;
+    productName.textContent = product.name;
+
+    openProductDetail();
+}
+
 
 function detailProduct(e){
         productDetails.classList.remove('inactive');
