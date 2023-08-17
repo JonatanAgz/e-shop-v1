@@ -15,10 +15,11 @@
 <body>
     <nav>
         <img src="/icons/icon_menu.svg" alt="menu" class="burguer-icon" />
+        <img src="icons/icon_search.png" alt="icono-buscar" class="icon-search otro">
         <div class="navbar-left">
             <img src="/logos/logo_yard_sale.svg" alt="logo" class="logo" />
             <ul>
-                <li><a href="">All</a></li>
+                <li><a href="" class="icon-search"><img src="icons/icon_search.png" alt="icono-buscar" class=""></a></li>
                 <li><a href="">Clothes</a></li>
                 <li><a href="">Electronics</a></li>
                 <li><a href="">Furnitures</a></li>
@@ -28,7 +29,7 @@
         </div>
         <div class="navbar-right">
             <ul>
-                <li class="navbar-email">camilayooko@gmail.com</li>
+                <li class="navbar-email">niwyro@gmail.com</li>
                 <li class="email-nav">
                     <img src="/icons/flechita.svg" alt="flecha" class="icon-display-menu"/>
                 </li>
@@ -51,7 +52,6 @@
             <div class="links">
                 <ul>
                     <li><a href="">CATEGORIES</a></li>
-                    <li><a href="">All</a></li>
                     <li><a href="">Clothes</a></li>
                     <li><a href="">Electronics</a></li>
                     <li><a href="">Furnitures</a></li>
@@ -62,13 +62,22 @@
                     <li><a href="">My orders</a></li>
                     <li><a href="">My account</a></li>
                 </ul>
+                <ul>
+                    <li><a href="" class="email">niwyro@gmail.com</a></li>
+                    <li><a href="" class="sign-out">Sign out</a></li>
+                </ul>
             </div>
-            <ul>
-                <li><a href="" class="email">camilayokoo@gmail.com</a></li>
-                <li><a href="" class="sign-out">Sign out</a></li>
-            </ul>
         </div>
     </nav>
+
+    <!-- Barra de búsqueda -->
+    <div class="searchBarContainer inactive">
+        <label for="" class="label">Encuentra un producto</label>
+        <div>
+        <input type="text" name="searcher" class="searcher" id="searcher" placeholder="Escribe lo que estás buscando">
+        <img src="icons/icon_close.png" class="searchBarErase">
+        </div>
+    </div>
 
     <!-- Carrito de compras -->
     <aside class="cart-items inactive">
@@ -83,24 +92,13 @@
             <p>
                 <span>Total</span>
             </p>
-            <p>$0</p>
+            <p class="total-price">$0</p>
         </div>
         <button class="btn-primary">Checkout</button>
     </aside>
 
     <!-- Detalle del producto -->
     <aside class="product-details inactive">
-        <div class="product-detail-close">
-            <img src="./icons/icon_close.png" alt="botón cerrar" class="close">
-        </div>
-        <img src="" alt="" class="product-image" id="product-image">
-        <div class="product-info">
-            <p class="product-price" id="product-price"></p>
-            <p class="product-name" id="product-name"></p>
-        </div>
-        <button class="btn-primary">
-            <img src="./icons/bt_add_to_cart.svg" alt="añadir al carro">
-        </button>
     </aside>
 
     <!-- Lista de productos -->

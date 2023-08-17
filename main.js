@@ -6,23 +6,30 @@ const shoppingCartIcon = document.querySelector('.navbar-shopping-cart');
 const shoppingCartMenu = document.querySelector('.cart-items');
 const cardsContainer = document.querySelector('.cards-container');
 const productDetails = document.querySelector('.product-details');
-const btnCloseDetails = document.querySelector('.product-detail-close');
 const displayMenuIcon = document.querySelector('.icon-display-menu');
 const shoppingCartCounter = document.querySelector('.counter');
 const shoppingCartOrderContent = document.querySelector('.my-order-content');
-const totalPriceShoppingCart = document.querySelector('.total-price');
+const searchIcon = document.querySelectorAll('.icon-search');
+const searchBar = document.querySelector('.searchBarContainer');
+const searchBarEraseIcon = document.querySelector('.searchBarErase');
+const searchInput = document.querySelector('.searcher');
+
+let totalPriceShoppingCart = document.querySelector('.total-price');
+
 
 let counter = 0;
 let idCounter = 0;
+let totalParcial = 0;
 
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burguerIcon.addEventListener('click', toggleMobileMenu);
 shoppingCartIcon.addEventListener('click', toggleShoppingCartMenu);
-btnCloseDetails.addEventListener('click', closeProductDetail);
 displayMenuIcon.addEventListener('click', toggleDesktopMenu);
-// shoppingButton.addEventListener('click', prueba);
-
+searchIcon.forEach((e)=>{
+    e.addEventListener('click', toggleSearchBar);
+});
+searchBarEraseIcon.addEventListener('click', clearFilter);
 
 function prueba(){
     console.log("Si funciona");
@@ -32,12 +39,14 @@ function toggleDesktopMenu(){
     desktopMenu.classList.toggle('inactive');
     shoppingCartMenu.classList.add('inactive');
     productDetails.classList.add('inactive');
+    searchBar.classList.add('inactive');
 }
 
 function toggleMobileMenu(){
     mobileMenu.classList.toggle('inactive');
     shoppingCartMenu.classList.add('inactive');
     productDetails.classList.add('inactive');
+    searchBar.classList.add('inactive');
 }
 
 function toggleShoppingCartMenu(){
@@ -45,6 +54,7 @@ function toggleShoppingCartMenu(){
     desktopMenu.classList.add('inactive');
     mobileMenu.classList.add('inactive');
     productDetails.classList.add('inactive');
+    searchBar.classList.add('inactive');
 }
 
 function openProductDetail(){
@@ -64,18 +74,39 @@ function closeProductDetail(){
     // productName.innerText = '';
 }
 
-function shoppingCartCount(){
-    shoppingCartCounter.innerText = counter +=1;
+function toggleSearchBar(){
+    event.preventDefault();
+    searchBar.classList.toggle('inactive');
+    // mobileMenu.classList.add('inactive');
+    // console.log('1vez');
+    
 }
 
-function shoppingCartReduce(){
-    shoppingCartCounter.innerText = counter -=1;
+function clearFilter(){
+    console.log('si llama');
+    searchInput.value = '';
+    if (searchInput.value == ''){
+        cardsContainer.innerHTML = '';
+        listProducts(productList);
+    }    
 }
+
+const searchItem = document.addEventListener('keyup', e=>{
+    
+    if(e.target.matches('#searcher')){
+        document.querySelectorAll('.product-card').forEach(name =>{
+            name.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+            // console.log(name.textContent.toLowerCase());
+            ?name.classList.remove('inactive')
+            :name.classList.add('inactive');
+        })
+    };
+})
+
 
 const deleteItemShoppingCart = (id)=>{
     const productCartItem = document.getElementById(id);
     productCartItem.remove(id);
-    console.log(productCartItem);
 }
 
 const renderShoppingCart = (product)=>{
@@ -108,21 +139,33 @@ const renderShoppingCart = (product)=>{
     productCartCloseIcon.addEventListener('click', ()=>{
         deleteItemShoppingCart(productCartItem.id);
     });
-    productCartCloseIcon.addEventListener('click', shoppingCartReduce);
+    productCartCloseIcon.addEventListener('click', ()=>{
+        updateTotalPrice(product.price);
+    })
     
     productCartFigure.append(productCartImg);
     productCartItem.append(productCartFigure);
     productCartItem.append(productCartFigure, productCartName, productCartPrice, productCartCloseIcon);
     shoppingCartOrderContent.append(productCartItem);
 
-    console.log(productCartItem.id);
-
     updateTotalPrice(product.price);
 }
 
 const updateTotalPrice = (productPrice) => {
-    totalPriceShoppingCart.innerText = (productPrice+=1);
-    console.log(productPrice);
+    if (event.target.classList.contains('shopping-btn') || event.target.classList.contains('btn-primary')){
+        totalParcial += productPrice;
+        totalPriceShoppingCart.innerText = totalParcial;
+        shoppingCartCounter.innerText = counter +=1;
+    } else {
+        totalParcial -= productPrice;
+        totalPriceShoppingCart.innerText = totalParcial;
+        shoppingCartCounter.innerText = counter -=1;
+    }
+}
+
+const reduceTotalPrice = (productPrice) => {
+    totalParcial -= productPrice;
+    totalPriceShoppingCart.innerText = totalParcial;
 }
 
 const productList = [];
@@ -135,13 +178,13 @@ productList.push({
 
 productList.push({
     name: "Bicicleta montaña",
-    price: 225,
+    price: 195,
     image: "https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2021/5/27/vyj8s9gzsshtgrlptqtj/cross-country-racing-mountain-bike"
 });
 
 productList.push({
     name: "Bicicleta ruta",
-    price: 195,
+    price: 175,
     image: "https://ciclocross.com.co/wp-content/uploads/2022/10/alan.jpg"
 });
 
@@ -158,7 +201,6 @@ function listProducts(productList){
     
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
-        productImg.addEventListener('click', detailProduct);
         productImg.addEventListener('click', ()=>{
             openProductInfo(product);
         });
@@ -170,13 +212,13 @@ function listProducts(productList){
         const productPrice = document.createElement('p');
         productPrice.innerText = `$ ${product.price}`;
         const productName = document.createElement('p');
+        productName.classList.add('product-name');
         productName.innerText = product.name;
         
         const shoppingIconContainer = document.createElement('figure');
         const shoppingCartIcon = document.createElement('img');
         shoppingCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
         shoppingCartIcon.classList.add('shopping-btn');
-        shoppingCartIcon.addEventListener('click', shoppingCartCount);
         shoppingCartIcon.addEventListener('click', ()=>{
             renderShoppingCart(product);
         });
@@ -195,112 +237,82 @@ function listProducts(productList){
 
 listProducts(productList);
 
-/*
-<aside class="product-detail inactive">
-        <div class="product-detail-close">
-            <img src="/icons/icon_close.png" alt="close" class="close" />
-        </div>
-        <img src="https://www.popsci.com/uploads/2020/07/07/AOYRPGQSKJHM3LEJUQDXGOH374-1024x768.jpg" alt="product"
-            class="product-image" />
-        <div class="dots">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-        <div class="product-detail-info">
-            <p>$ 49.99</p>
-            <p>Retro Bike</p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quam
-                unde suscipit rerum, eligendi quis. Blanditiis eos dolorum qui vel,
-                sapiente aperiam similique! Inventore et assumenda, odit distinctio
-                ipsa quo.
-            </p>
-            <button class="btn-primary">
-                <img src="/icons/bt_add_to_cart.svg" alt="add to cart" />Add to cart
-            </button>
-        </div>
-    </aside>
-    */
 
 const openProductInfo = (product)=>{
-    const productDetails = document.querySelector('.product-details');
-    const productImg = document.querySelector('.product-image');
-    const productPrice = document.querySelector('.product-price');
-    const productName = document.querySelector('.product-name');
+    /*<aside class="product-details inactive">
+        <div class="product-detail-close">
+            <img src="./icons/icon_close.png" alt="botón cerrar" class="close">
+        </div>
+        <img src="" alt="" class="product-image" id="product-image">
+        <div class="product-info">
+            <p class="product-price" id="product-price"></p>
+            <p class="product-name" id="product-name"></p>
+        </div>
+        <button class="btn-primary">
+            <img src="./icons/bt_add_to_cart.svg" alt="añadir al carro">
+        </button>
+    </aside> */
+
+    productDetails.innerHTML = '';
+
+    const productDetailCloseContainer = document.createElement('div');
+    productDetailCloseContainer.classList.add('product-detail-close');
+    productDetailCloseContainer.addEventListener('click', closeProductDetail);
+
+    const productDetailCloseIcon = document.createElement('img');
+    productDetailCloseIcon.setAttribute('src', './icons/icon_close.png');
+    productDetailCloseIcon.classList.add('close');
+
+    const productImage = document.createElement('img');
+    productImage.setAttribute('src', product.image);
+    productImage.classList.add('product-image');
+
+    const productInfoContainer = document.createElement('div');
+    productInfoContainer.classList.add('product-detail-info');
+
+    const productPrice = document.createElement('p');
+    productPrice.innerText = `$ ${product.price}`;
+    productPrice.classList.add('product-price');
+
+    const productName = document.createElement('p');
+    productName.innerText = product.name;
+    productName.classList.add('product-name');
+
+    const addToCartButton = document.createElement('button');
+    addToCartButton.classList.add('btn-primary');
+    addToCartButton.innerText = "Add to Cart";
+    addToCartButton.addEventListener('click', ()=>{
+        renderShoppingCart(product);
+    })
+
+    const addToCartIcon = document.createElement('img');
+    addToCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
+    addToCartIcon.classList.add('shopping-btn');
+    
+    addToCartButton.append(addToCartIcon);
+    productInfoContainer.append(productPrice, productName, addToCartButton);
+    productDetailCloseContainer.append(productDetailCloseIcon);
+
+    productDetails.append(productDetailCloseContainer,productImage,productInfoContainer);
 
     productDetails.classList.remove('inactive');
 
-    productImg.setAttribute('src', product.image);
-    productPrice.textContent = product.price;
-    productName.textContent = product.name;
 
-    openProductDetail();
+
+    // const productDetails = document.querySelector('.product-details');
+    // const productImg = document.querySelector('.product-image');
+    // const productPrice = document.querySelector('.product-price');
+    // const productName = document.querySelector('.product-name');
+
+    // productDetails.classList.remove('inactive');
+
+    // productImg.setAttribute('src', product.image);
+    // productPrice.textContent = product.price;
+    // productName.textContent = product.name;
+
+    // openProductDetail();
 }
 
 
-function detailProduct(e){
-        productDetails.classList.remove('inactive');
 
-        const imagenProducto = document.querySelector('.product-image');
-        imagenProducto.setAttribute('src', e.target.src);
-        
-        const precioProducto = document.querySelector('.product-price');
-        precioProducto.innerText = e.target.nextElementSibling.innerText;
-        console.log(precioProducto);
-
-        // const nombreProducto = document.querySelector('.product-name');
-        // nombreProducto.innerText = e.target.nextElementSibling.innerText;
-
-        // const productDetailClose = document.createElement('div');
-        // productDetailClose.classList.add('product-detail-close');
-        // productDetailClose.addEventListener('click', closeProductDetail);
-
-        // const iconClose = document.createElement('img');
-        // iconClose.classList.add('close');
-        // iconClose.setAttribute('src', '/icons/icon_close.png');
-
-        // const productImage = document.createElement('img');
-        // productImage.setAttribute('src', e.target.src);
-        // productImage.classList.add('product-image');
-
-        // const dotsContainer = document.createElement('div');
-        // dotsContainer.classList.add('dots');
-
-        // const dot1 = document.createElement('span');
-        // const dot2 = document.createElement('span');
-        // const dot3 = document.createElement('span');
-
-        // const productDetailInfo = document.createElement('div');
-        // productDetailInfo.classList.add('product-detail-info');
-        
-        // const productPrice = document.createElement('p');
-        // productPrice.innerText = e.target.nextElementSibling.firstChild.firstChild.innerText;
-        // productPrice.classList.add('product-price');
-
-        // const productName = document.createElement('p');
-        // productName.innerText = e.target.nextElementSibling.firstChild.lastChild.innerText;
-        // productName.classList.add('product-name');
-
-        // const productDescription = document.createElement('p');
-        // productDescription.innerText = "Por ahora nada";
-
-        // const button = document.createElement('button');
-        // button.classList.add('btn-primary');
-
-        // const addToCartIcon = document.createElement('img');
-        // addToCartIcon.setAttribute('src', '/icons/bt_add_to_cart.svg');
-
-        // button.append(addToCartIcon);
-
-        // productDetailInfo.append(productPrice, productName, productDescription);
-
-        // dotsContainer.append(dot1, dot2, dot3);
-
-        // productDetailClose.append(iconClose);
-
-        // productDetails.append(productDetailClose, productImage, dotsContainer, productDetailInfo, button);
-
-    
-}
 
