@@ -3,7 +3,7 @@ const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const burguerIcon = document.querySelector('.burguer-icon');
 const shoppingCartIcon = document.querySelector('.navbar-shopping-cart');
-const shoppingCartMenu = document.querySelector('.cart-items');
+const shoppingCartMenu = document.querySelector('.shopping-cart');
 const cardsContainer = document.querySelector('.cards-container');
 const productDetails = document.querySelector('.product-details');
 const displayMenuIcon = document.querySelector('.icon-display-menu');
@@ -13,14 +13,12 @@ const searchIcon = document.querySelectorAll('.icon-search');
 const searchBar = document.querySelector('.searchBarContainer');
 const searchBarEraseIcon = document.querySelector('.searchBarErase');
 const searchInput = document.querySelector('.searcher');
+const category = document.querySelectorAll('.category');
 
 let totalPriceShoppingCart = document.querySelector('.total-price');
-
-
 let counter = 0;
 let idCounter = 0;
 let totalParcial = 0;
-
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burguerIcon.addEventListener('click', toggleMobileMenu);
@@ -31,9 +29,27 @@ searchIcon.forEach((e)=>{
 });
 searchBarEraseIcon.addEventListener('click', clearFilter);
 
-function prueba(){
-    console.log("Si funciona");
+category.forEach((e)=>{
+    
+    e.addEventListener('click', (e)=>{
+        e.preventDefault();
+        console.log(e.target.value);
+        if(e.target.matches('.category')){
+            document.querySelectorAll('.product-card').forEach(name => {
+                name.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                ?name.classList.remove('inactive')
+                :name.classList.add('inactive');
+            })};
+    })
+});
+
+
+function test() {
+    event.preventDefault();
+    console.log(event);
+    // console.log("a ver");
 }
+
 
 function toggleDesktopMenu(){ 
     desktopMenu.classList.toggle('inactive');
@@ -66,24 +82,16 @@ function openProductDetail(){
 
 function closeProductDetail(){
     productDetails.classList.add('inactive');
-    // const productImage = document.querySelector('.product-image');
-    // const productPrice = document.querySelector('.product-price');
-    // const productName = document.querySelector('.product-name');
-    // productImage.setAttribute('src', '');
-    // productPrice.innerText = '';
-    // productName.innerText = '';
 }
 
 function toggleSearchBar(){
     event.preventDefault();
     searchBar.classList.toggle('inactive');
-    // mobileMenu.classList.add('inactive');
-    // console.log('1vez');
-    
+    shoppingCartMenu.classList.add('inactive');
+    desktopMenu.classList.add('inactive');
 }
 
 function clearFilter(){
-    console.log('si llama');
     searchInput.value = '';
     if (searchInput.value == ''){
         cardsContainer.innerHTML = '';
@@ -91,8 +99,8 @@ function clearFilter(){
     }    
 }
 
-const searchItem = document.addEventListener('keyup', e=>{
-    
+const searchItem = document.addEventListener('keyup', (e)=>{
+    console.log('Evento' + e);
     if(e.target.matches('#searcher')){
         document.querySelectorAll('.product-card').forEach(name =>{
             name.textContent.toLowerCase().includes(e.target.value.toLowerCase())
@@ -103,97 +111,142 @@ const searchItem = document.addEventListener('keyup', e=>{
     };
 })
 
+// const filterItem = document.addEventListener('click', (e)=>{
+//     e.preventDefault();
+//     console.log(e.target);
+//     if(e.target.matches('.category')){
+//         document.querySelectorAll('.product-card').forEach(name => {
+//             name.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+//             ?name.classList.remove('inactive')
+//             :name.classList.add('inactive');
+//         })
+//     }
+// })
 
-const deleteItemShoppingCart = (id)=>{
-    const productCartItem = document.getElementById(id);
-    productCartItem.remove(id);
-}
-
-const renderShoppingCart = (product)=>{
-    // <div class="shopping-cart-item">
-    //     <figure>
-    //         <img src="https://www.popsci.com/uploads/2020/07/07/AOYRPGQSKJHM3LEJUQDXGOH374-1024x768.jpg" alt="bike" />
-    //     </figure>
-    //     <p>Bike</p>
-    //     <p>$ 49.99</p>
-    //     <img src="/icons/icon_close.png" alt="close" />
-    // </div>
-    idCounter++;
-
-    const productCartItem = document.createElement('div');
-    productCartItem.classList.add('shopping-cart-item');
-    productCartItem.setAttribute('id', idCounter);
-
-    const productCartFigure = document.createElement('figure');
-
-    const productCartImg = document.createElement('img');
-    productCartImg.setAttribute('src', product.image);
-
-    const productCartName = document.createElement('p');
-    productCartName.textContent = product.name;
-    const productCartPrice = document.createElement('p');
-    productCartPrice.textContent = product.price;
-    const productCartCloseIcon = document.createElement('img');
-    productCartCloseIcon.setAttribute('src', './icons/icon_close.png');
-    productCartCloseIcon.classList.add('close-item');
-    productCartCloseIcon.addEventListener('click', ()=>{
-        deleteItemShoppingCart(productCartItem.id);
-    });
-    productCartCloseIcon.addEventListener('click', ()=>{
-        updateTotalPrice(product.price);
-    })
-    
-    productCartFigure.append(productCartImg);
-    productCartItem.append(productCartFigure);
-    productCartItem.append(productCartFigure, productCartName, productCartPrice, productCartCloseIcon);
-    shoppingCartOrderContent.append(productCartItem);
-
-    updateTotalPrice(product.price);
-}
-
-const updateTotalPrice = (productPrice) => {
-    if (event.target.classList.contains('shopping-btn') || event.target.classList.contains('btn-primary')){
-        totalParcial += productPrice;
-        totalPriceShoppingCart.innerText = totalParcial;
-        shoppingCartCounter.innerText = counter +=1;
-    } else {
-        totalParcial -= productPrice;
-        totalPriceShoppingCart.innerText = totalParcial;
-        shoppingCartCounter.innerText = counter -=1;
-    }
-}
-
-const reduceTotalPrice = (productPrice) => {
-    totalParcial -= productPrice;
-    totalPriceShoppingCart.innerText = totalParcial;
-}
+//********************* Lista de productos ************************************* 
 
 const productList = [];
 
 productList.push({
-    name: "Bicicleta antigua",
+    name: "GW Jaguar 29",
     price: 120,
-    image: "https://www.popsci.com/uploads/2020/07/07/AOYRPGQSKJHM3LEJUQDXGOH374-1024x768.jpg"
+    image: "https://gwbicycles.com/cdn/shop/products/Bicicleta-Jaguar-MTB-29-GW-Bicycles-Colombia_1800x1800.jpg?v=1652191652"
 });
 
 productList.push({
-    name: "Bicicleta montaña",
+    name: "GW Flamma",
     price: 195,
-    image: "https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2021/5/27/vyj8s9gzsshtgrlptqtj/cross-country-racing-mountain-bike"
+    image: "https://gwbicycles.com/cdn/shop/files/060241-4_1800x1800.jpg?v=1682623606"
 });
 
 productList.push({
-    name: "Bicicleta ruta",
+    name: "GW Hyena 29",
     price: 175,
-    image: "https://ciclocross.com.co/wp-content/uploads/2022/10/alan.jpg"
+    image: "https://gwbicycles.com/cdn/shop/files/54295-2_1800x1800.jpg?v=1682610456"
 });
 
 productList.push({
-    name: "Bicicleta iniciación",
+    name: "GW Gavia",
     price: 112,
-    image: "https://rascalrides.com/wp-content/uploads/park-cycles-14-inch-pedal-bike-1024x678.jpg"
+    image: "https://gwbicycles.com/cdn/shop/files/060248-1_1800x1800.jpg?v=1682624633"
 });
 
+productList.push({
+    name: "GW Scorpion 29",
+    price: 112,
+    image: "https://gwbicycles.com/cdn/shop/products/Bicicleta-Scorpion-MTB-29-GW-Bicycles-Colombia_1800x1800.jpg?v=1652191706"
+});
+
+productList.push({
+    name: "GW K2",
+    price: 112,
+    image: "https://gwbicycles.com/cdn/shop/files/63748-2_1800x1800.jpg?v=1682624483"
+});
+
+productList.push({
+    name: "Specialized Epic 29",
+    price: 595,
+    image: 'https://marketplacer.imgix.net/RQ/8sSebv6fSlY2ST8v4SnfwMq5M.jpg?auto=format&fm=pjpg&fit=max&w=920&h=640&s=44ba07e709086854da29dbbe7e1d61da'
+});
+
+productList.push({
+    name: "Specialized Fuse Sport 27.5",
+    price: 595,
+    image: 'https://p.vitalmtb.com/photos/products/35168/photos/82341/original_photo_219259.jpg?VersionId=FhkpIU4po0dA6O09I5PpP.ygkkAbZCVl'
+});
+
+productList.push({
+    name: "Specialized Chisel 29",
+    price: 595,
+    image: 'https://marketplacer.imgix.net/Sn/cMP-KjEHvxBFapjJhdEa0uYTA.jpg?auto=format&fm=pjpg&fit=max&w=800&h=800&s=bf95f2bd0fbcd7b86839f687b8f886c8'
+});
+
+productList.push({
+    name: "Specialized Rockhopper 29",
+    price: 595,
+    image: 'https://marketplacer.imgix.net/AY/AyeFVwt807FqvNqZrw47N7oSU?auto=format&fm=pjpg&fit=max&w=3000&h=2100&s=ef041286cd1d9a5b4e60d6d7e38ad33e'
+});
+productList.push({
+    name: "Giant Fathom",
+    price: 225,
+    image: 'https://tiendabicicol.vteximg.com.br/arquivos/ids/166621/2201017225.jpg?v=638150120095670000'
+});
+
+productList.push({
+    name: "Liv Tempt 29",
+    price: 165,
+    image: 'https://tiendabicicol.vteximg.com.br/arquivos/ids/166214/2201121124.jpg?v=638077426022970000'
+});
+
+productList.push({
+    name: "Giant Talon 29",
+    price: 365,
+    image: 'https://tiendabicicol.vteximg.com.br/arquivos/ids/165866/2201104127.jpg?v=637957422667870000'
+});
+
+productList.push({
+    name: "Giant Xtc Slr 29",
+    price: 595,
+    image: 'https://tiendabicicol.vteximg.com.br/arquivos/ids/165778/2201008224.jpg?v=637909199146400000'
+});
+
+productList.push({
+    name: "Trek Procaliber 9.8",
+    price: 595,
+    image: 'https://media.trekbikes.com/image/upload/f_auto,fl_progressive:semi,q_auto,w_1440,h_1080,c_pad/Procaliber98_22_35115_A_Primary'
+});
+
+productList.push({
+    name: "Trek Marlin 7",
+    price: 595,
+    image: 'https://media.trekbikes.com/image/upload/f_auto,fl_progressive:semi,q_auto,w_1440,h_1080,c_pad/Marlin7_23_36967_A_Primary'
+});
+
+productList.push({
+    name: "Trek Marlin 5",
+    price: 495,
+    image: 'https://bikehouse.co/cdn/shop/products/MARLIN5VolttoMiamiGreenFade_720x.jpg?v=1682714684'
+});
+
+productList.push({
+    name: "Trek Domane AL",
+    price: 395,
+    image: 'https://bikehouse.co/cdn/shop/products/domane-al-2-negra_720x.jpg?v=1662754065'
+});
+
+productList.push({
+    name: "Trek X Caliber 9",
+    price: 495,
+    image: 'https://bikehouse.co/cdn/shop/products/XCaliber9_22_35112_B_Primary_720x.jpg?v=1658155889'
+});
+
+productList.push({
+    name: "Trek Urban FX2",
+    price: 295,
+    image: 'https://bikehouse.co/cdn/shop/products/fx2wsdtl_720x.jpg?v=1655326184'
+});
+
+// ************ Función renderizar productos *******************
 function listProducts(productList){
     productList.forEach(product =>{
         const productCard = document.createElement('div');
@@ -231,28 +284,15 @@ function listProducts(productList){
         
         productCard.append(productImg, productInfo);
         
-        cardsContainer.appendChild(productCard);
+        cardsContainer.append(productCard);
     });
 }
 
 listProducts(productList);
 
-
+//************** Función abrir detalles de producto **************************/
 const openProductInfo = (product)=>{
-    /*<aside class="product-details inactive">
-        <div class="product-detail-close">
-            <img src="./icons/icon_close.png" alt="botón cerrar" class="close">
-        </div>
-        <img src="" alt="" class="product-image" id="product-image">
-        <div class="product-info">
-            <p class="product-price" id="product-price"></p>
-            <p class="product-name" id="product-name"></p>
-        </div>
-        <button class="btn-primary">
-            <img src="./icons/bt_add_to_cart.svg" alt="añadir al carro">
-        </button>
-    </aside> */
-
+    openProductDetail();
     productDetails.innerHTML = '';
 
     const productDetailCloseContainer = document.createElement('div');
@@ -297,20 +337,63 @@ const openProductInfo = (product)=>{
 
     productDetails.classList.remove('inactive');
 
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    }
+)};
 
+//*************************** Función carrito de compras **************************
 
-    // const productDetails = document.querySelector('.product-details');
-    // const productImg = document.querySelector('.product-image');
-    // const productPrice = document.querySelector('.product-price');
-    // const productName = document.querySelector('.product-name');
+const renderShoppingCart = (product)=>{
+    idCounter++;
 
-    // productDetails.classList.remove('inactive');
+    const productCartItem = document.createElement('div');
+    productCartItem.classList.add('shopping-cart-item');
+    productCartItem.setAttribute('id', idCounter);
 
-    // productImg.setAttribute('src', product.image);
-    // productPrice.textContent = product.price;
-    // productName.textContent = product.name;
+    const productCartFigure = document.createElement('figure');
 
-    // openProductDetail();
+    const productCartImg = document.createElement('img');
+    productCartImg.setAttribute('src', product.image);
+
+    const productCartName = document.createElement('p');
+    productCartName.textContent = product.name;
+    const productCartPrice = document.createElement('p');
+    productCartPrice.textContent = `$ ${product.price}`;
+    const productCartCloseIcon = document.createElement('img');
+    productCartCloseIcon.setAttribute('src', './icons/icon_close.png');
+    productCartCloseIcon.classList.add('close');
+    productCartCloseIcon.addEventListener('click', ()=>{
+        deleteItemShoppingCart(productCartItem.id);
+    });
+    productCartCloseIcon.addEventListener('click', ()=>{
+        updateTotalPrice(product.price);
+    })
+    
+    productCartFigure.append(productCartImg);
+    productCartItem.append(productCartFigure);
+    productCartItem.append(productCartFigure, productCartName, productCartPrice, productCartCloseIcon);
+    shoppingCartOrderContent.append(productCartItem);
+
+    updateTotalPrice(product.price);
+}
+
+const updateTotalPrice = (productPrice) => {
+    if (event.target.classList.contains('shopping-btn') || event.target.classList.contains('btn-primary')){
+        totalParcial += productPrice;
+        totalPriceShoppingCart.innerText = `$ ${totalParcial}`;
+        shoppingCartCounter.innerText = counter +=1;
+    } else {
+        totalParcial -= productPrice;
+        totalPriceShoppingCart.innerText = `$ ${totalParcial}`;
+        shoppingCartCounter.innerText = counter -=1;
+    }
+}
+
+const deleteItemShoppingCart = (id)=>{
+    const productCartItem = document.getElementById(id);
+    productCartItem.remove(id);
 }
 
 
