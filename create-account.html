@@ -3,115 +3,94 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/jpg" href="assets/logos/logo_bike_store.svg"/>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./assets/styles.css">
 	<title>Create Account</title>
-	<style>
-		:root {
-			--gray: #c7c7c7;
-			--text-input-field: #f7f7f7;
-			--green: #ACD9B2;
-			--white: #fffFff;
-			--black: #000000;
-			--sm: 14px;
-			--md: 16px;
-			--lg: 18px;
-		}
-
-		body {
-			margin: 0;
-			font-family: 'Quicksand', sans-serif;
-/*			box-sizing: border-box;*/
-		}
-
-		.login {
-			display: grid;
-			place-items: center;
-			width: 100%;
-			height: 100vh;
-		}
-
-		.form-container {
-			display: grid;
-			grid-template-rows: auto 1fr auto;
-			width: 300px;
-		}
-
-		.title {
-			text-align: start;
-			margin-bottom: 36px;
-			font-size: var(--lg);
-		}
-
-		.form {
-			display: flex;
-			flex-direction: column;
-		}
-
-		.form div {
-			display: flex;
-			flex-direction: column;
-		}
-
-		.label {
-			margin-bottom: 4px;
-			font-size: var(--sm);
-			font-weight: bold;
-		}
-
-		.input {
-			height: 30px;
-			padding: 6px;
-			margin-bottom: 12px;
-			background-color: var(--text-input-field);
-			font-size: var(--md);
-			border: none;
-			border-radius: 8px;
-		}
-
-		.input-name,
-		.input-email,
-		.input-password {
-			margin-bottom: 22px;
-		}
-
-		.btn-primary {
-			width: 100%;
-			height: 50px;
-			font-size: var(--md);
-			font-weight: bold;
-			background: var(--green);
-			color: var(--white);
-			cursor: pointer;
-			border-radius: 8px;
-			border: none;
-		}
-
-		.btn-login {
-			margin-top: 14px;
-			margin-bottom: 30px;
-		}
-
-		@media (max-width: 640px) {
-			.form-container {
-				height: 100%;
-			}
-
-			.form {
-				height: 100%;
-				justify-content: space-between;
-			}
-		}
-
-
-
-	</style>
 </head>
+
 <body>
+	<nav>
+        <img src="./assets/icons/icon_menu.svg" alt="menu" class="burguer-icon" />
+        <img src="./assets/icons/icon_search.png" alt="icono-buscar" class="icon-search icon-search-mobile">
+        <div class="navbar-left">
+            <img src="./assets/logos/logo_bike_store.svg" alt="logo" class="logo" />
+            <ul>
+                <li><a href="" class="icon-search"><img src="./assets/icons/icon_search.png" alt="icono-buscar" class=""></a></li>
+                <li><a href="index.html" class="category">Home</a></li>
+                <li><a href="store.html" class="category">Bikes</a></li>
+                <li><a href="create-account.html">Sign up</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <ul>
+                <li class="navbar-email">jonatanagsz@gmail.com</li>
+                <li class="email-nav">
+                    <img src="./assets/icons/flechita.svg" alt="flecha" class="icon-display-menu"/>
+                </li>
+                <li class="navbar-shopping-cart">
+                    <img src="./assets/icons/icon_shopping_cart.svg" alt="shopping-cart" class="logo-cart" />
+                    <div class="counter"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="desktop-menu inactive">
+            <ul>
+                <li><a href="my-orders.html" class="title">My orders</a></li>
+                <li><a href="create-account.html" class="title">My account</a></li>
+                <li><a href="index.html" class="title">Sign out</a></li>
+            </ul>
+        </div>
+
+        <!-- Menu mobile -->
+        <div class="mobile-menu inactive">
+            <div class="links">
+                <ul>
+                    <li><a href="" class="category">CATEGORIES</a></li>
+                    <li><a href="" class="category">Clothes</a></li>
+                    <li><a href="" class="category">Electronics</a></li>
+                    <li><a href="" class="category">Furnitures</a></li>
+                    <li><a href="" class="category">Toys</a></li>
+                    <li><a href="" class="category">Others</a></li>
+                </ul>
+                <ul>
+                    <li><a href="">My orders</a></li>
+                    <li><a href="">My account</a></li>
+                </ul>
+                <ul>
+                    <li><a href="" class="email">jonatanagsz@gmail.com</a></li>
+                    <li><a href="" class="sign-out">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carrito de compras -->
+    <aside class="shopping-cart inactive">
+        <div class="title-container">
+            <img src="./assets/icons/flechita.svg" alt="arrow" />
+            <p class="title">Shopping Cart</p>
+        </div>
+        <div class="my-order-content">
+            
+        </div>
+        <div class="order">
+            <p>
+                <span>Total</span>
+            </p>
+            <p class="total-price">$0</p>
+        </div>
+        <button class="btn-primary">Checkout</button>
+    </aside>
+
+	<!-- Create account -->
+
 	<div class="login">
 		<div class="form-container">
-			<h1 class="title">My account</h1>
+			<h1 class="title-form">My account</h1>
 			<form action="" class="form">
 				<div >
 					<label for="name" class="label">Name</label>
@@ -121,9 +100,16 @@
 					<label for="second-password" class="label">Password</label>
 					<input type="password" id="password" class="input input-password" placeholder="********">
 				</div>
-				<input type="submit" name="" value="Create account" class="btn-primary btn-login">
+				<input type="submit" name="" value="Create account" class="btn-submit">
 			</form>
 		</div>
 	</div>
+	
+	<!-- Footer -->
+	<footer class="footer">
+        <p>E-Shop Demo</p>
+        <p>Jonatan Agudelo Suarez &copy; 2023</p>
+    </footer>
+	<script src="./main.js"></script>
 </body>
 </html>

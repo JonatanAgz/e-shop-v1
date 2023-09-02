@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/jpg" href="assets/logos/logo_bike_store.svg"/>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="./assets/styles.css">
-	<title>Login</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpg" href="assets/logos/logo_bike_store.svg"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <title>Bike Store: Tienda Online</title>
 </head>
+
 <body>
-	<nav>
+    <nav>
         <img src="./assets/icons/icon_menu.svg" alt="menu" class="burguer-icon" />
         <img src="./assets/icons/icon_search.png" alt="icono-buscar" class="icon-search icon-search-mobile">
         <div class="navbar-left">
@@ -67,6 +70,15 @@
         </div>
     </nav>
 
+    <!-- Barra de búsqueda -->
+    <div class="searchBarContainer slide-in-blurred-top inactive">
+        <label for="" class="label">Encuentra un producto</label>
+        <div>
+        <input type="text" name="searcher" class="searcher" id="searcher" placeholder="Escribe lo que estás buscando">
+        <img src="./assets/icons/icon_close.png" class="searchBarErase">
+        </div>
+    </div>
+
     <!-- Carrito de compras -->
     <aside class="shopping-cart inactive">
         <div class="title-container">
@@ -85,28 +97,21 @@
         <button class="btn-primary">Checkout</button>
     </aside>
 
-	<!-- Login -->
-	<div class="login">
-		<div class="form-container">
-			<img src="./assets/logos/logo_bike_store.svg" alt="logo" class="logo-login">
-			<form action="" class="form">
-				<label for="email" class="label">Email address</label>
-				<input type="email" id="email" class="input input-email" placeholder="camilayokoo@gmail.com">
-				<label for="password" class="label">Password</label>
-				<input type="password" id="password" class="input input-password" placeholder="********">
-				<input type="submit" name="" value="Log in" class="btn-primary btn-login">
-				<a href="#" class="forgot">Forgot my password</a>
-			</form>
-			<button class="btn-secondary btn-signup">Sign up</button>
-		</div>
-	</div>
+    <!-- Detalle del producto -->
+    <aside class="product-details inactive">
+    </aside>
 
-	<!-- Footer -->
-	<footer class="footer">
+    <!-- Lista de productos -->
+    <section class="main-container">
+        <div class="cards-container"></div>
+    </section>
+
+    <footer class="footer">
         <p>E-Shop Demo</p>
         <p>Jonatan Agudelo Suarez &copy; 2023</p>
     </footer>
 
     <script src="./main.js"></script>
 </body>
+
 </html>

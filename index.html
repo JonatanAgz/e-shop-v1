@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="assets/logos/logo_bike_store.svg"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet" />
-    <title>Bike Store: Tienda Online</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>Inicio</title>
 </head>
-
 <body>
     <nav>
-        <img src="/icons/icon_menu.svg" alt="menu" class="burguer-icon" />
-        <img src="icons/icon_search.png" alt="icono-buscar" class="icon-search icon-search-mobile">
+        <img src="./assets/icons/icon_menu.svg" alt="menu" class="burguer-icon" />
+        <img src="./assets/icons/icon_search.png" alt="icono-buscar" class="icon-search icon-search-mobile">
         <div class="navbar-left">
-            <img src="/logos/logo_bike_store.svg" alt="logo" class="logo" />
+            <img src="./assets//logos/logo_bike_store.svg" alt="logo" class="logo" />
             <ul>
-                <li><a href="" class="icon-search"><img src="icons/icon_search.png" alt="icono-buscar" class=""></a></li>
-                <li><a href="" class="category">Clothes</a></li>
-                <li><a href="" class="category">Electronics</a></li>
-                <li><a href="" class="category">Furnitures</a></li>
-                <li><a href="" class="category">Toys</a></li>
-                <li><a href="" class="category">Others</a></li>
+                <li><a href="" class="icon-search"><img src="./assets/icons/icon_search.png" alt="icono-buscar" class=""></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="store.html">Bikes</a></li>
+                <li><a href="create-account.html">Sign up</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </div>
         <div class="navbar-right">
             <ul>
                 <li class="navbar-email">jonatanagsz@gmail.com</li>
                 <li class="email-nav">
-                    <img src="/icons/flechita.svg" alt="flecha" class="icon-display-menu"/>
+                    <img src="./assets/icons/flechita.svg" alt="flecha" class="icon-display-menu"/>
                 </li>
                 <li class="navbar-shopping-cart">
-                    <img src="/icons/icon_shopping_cart.svg" alt="shopping-cart" class="logo-cart" />
+                    <img src="./assets/icons/icon_shopping_cart.svg" alt="shopping-cart" class="logo-cart" />
                     <div class="counter"></div>
                 </li>
             </ul>
         </div>
         <div class="desktop-menu inactive">
             <ul>
-                <li><a href="#" class="title">My orders</a></li>
-                <li><a href="#" class="title">My account</a></li>
-                <li><a href="#" class="title">Sign out</a></li>
+                <li><a href="my-orders.html" class="title">My orders</a></li>
+                <li><a href="create-account.html" class="title">My account</a></li>
+                <li><a href="index.html" class="title">Sign out</a></li>
             </ul>
         </div>
 
@@ -69,49 +66,73 @@
             </div>
         </div>
     </nav>
-
-    <!-- Barra de búsqueda -->
-    <div class="searchBarContainer slide-in-blurred-top inactive">
-        <label for="" class="label">Encuentra un producto</label>
-        <div>
-        <input type="text" name="searcher" class="searcher" id="searcher" placeholder="Escribe lo que estás buscando">
-        <img src="icons/icon_close.png" class="searchBarErase">
-        </div>
-    </div>
-
-    <!-- Carrito de compras -->
-    <aside class="shopping-cart inactive">
-        <div class="title-container">
-            <img src="/icons/flechita.svg" alt="arrow" />
-            <p class="title">Shopping Cart</p>
-        </div>
-        <div class="my-order-content">
-            
-        </div>
-        <div class="order">
-            <p>
-                <span>Total</span>
-            </p>
-            <p class="total-price">$0</p>
-        </div>
-        <button class="btn-primary">Checkout</button>
-    </aside>
-
-    <!-- Detalle del producto -->
-    <aside class="product-details inactive">
-    </aside>
-
-    <!-- Lista de productos -->
-    <section class="main-container">
-        <div class="cards-container"></div>
-    </section>
-
+    <main class="container">
+        <section class="parallax uno">
+            <div class="text">
+                <a href="index.html"><h2>See all the products</h2></a>
+            </div>
+        </section>
+        <section class="parallax-text">
+            <img src="./assets/logos/logo_bike_store.svg" alt="" class="parallax-logo">
+            <p>We are a specialized cycling store, featuring several of the world's top bicycle brands with a wide variety of models where you can find the most suitable bike to meet your challenges and adventures</p>
+        </section>
+        <section class="parallax dos">
+            <div class="text">
+                <h2>Life is a journey... <br>Enjoy the ride</h2>
+            </div>
+        </section>
+        <section class="parallax-text">
+            <h2>Our Passion</h2>
+            <p>At BikeStore, we don't just sell bicycles; we live and breathe cycling. Every member of our team is a cycling enthusiast, from mountain trails to scenic road routes. This passion is reflected in the selection of products we offer and the service we provide</p>
+        </section>
+        <section class="parallax tres">
+            <div class="text">
+                <h2>Benefits</h2>
+            </div>
+        </section>
+        <section class="parallax-options">
+            <div class="item-section">
+                <div>
+                    <img src="./assets/icons/lock.svg" alt="" class="parallax-icon">
+                </div>
+                <div>
+                    <h3>Safe Shopping</h3>
+                    <p>100% Secured</p>
+                </div>
+            </div>
+            <div class="item-section">
+                <div>
+                    <img src="./assets/icons/box.svg" alt="" class="parallax-icon">
+                </div>
+                <div>
+                    <h3>National deliveries</h3>
+                    <p>In all the country </p>
+                </div>
+            </div>
+            <div class="item-section">
+                <div>
+                    <img src="./assets/icons/wallet.svg" alt="" class="parallax-icon">
+                </div>
+                <div>
+                    <h3>Payment methods</h3>
+                    <p>Diferent options</p>
+                </div>
+            </div>
+            <div class="item-section">
+                <div>
+                    <img src="./assets/icons/oficial.svg" alt="" class="parallax-icon">
+                </div>
+                <div>
+                    <h3>Original Products</h3>
+                    <p>Authorized distribuitors</p>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer class="footer">
-        <p>Proyecto personal</p>
+        <p>E-Shop Demo</p>
         <p>Jonatan Agudelo Suarez &copy; 2023</p>
     </footer>
-
     <script src="./main.js"></script>
 </body>
-
 </html>

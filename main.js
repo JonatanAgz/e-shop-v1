@@ -29,19 +29,19 @@ searchIcon.forEach((e)=>{
 });
 searchBarEraseIcon.addEventListener('click', clearFilter);
 
-category.forEach((e)=>{
+// category.forEach((e)=>{
     
-    e.addEventListener('click', (e)=>{
-        e.preventDefault();
-        console.log(e.target.value);
-        if(e.target.matches('.category')){
-            document.querySelectorAll('.product-card').forEach(name => {
-                name.textContent.toLowerCase().includes(e.target.value.toLowerCase())
-                ?name.classList.remove('inactive')
-                :name.classList.add('inactive');
-            })};
-    })
-});
+//     e.addEventListener('click', (e)=>{
+//         e.preventDefault();
+//         console.log(e.target.value);
+//         if(e.target.matches('.category')){
+//             document.querySelectorAll('.product-card').forEach(name => {
+//                 name.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+//                 ?name.classList.remove('inactive')
+//                 :name.classList.add('inactive');
+//             })};
+//     })
+// });
 
 
 function test() {
@@ -270,7 +270,7 @@ function listProducts(productList){
         
         const shoppingIconContainer = document.createElement('figure');
         const shoppingCartIcon = document.createElement('img');
-        shoppingCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
+        shoppingCartIcon.setAttribute('src', './assets/icons/bt_add_to_cart.svg');
         shoppingCartIcon.classList.add('shopping-btn');
         shoppingCartIcon.addEventListener('click', ()=>{
             renderShoppingCart(product);
@@ -300,7 +300,7 @@ const openProductInfo = (product)=>{
     productDetailCloseContainer.addEventListener('click', closeProductDetail);
 
     const productDetailCloseIcon = document.createElement('img');
-    productDetailCloseIcon.setAttribute('src', './icons/icon_close.png');
+    productDetailCloseIcon.setAttribute('src', './assets/icons/icon_close.png');
     productDetailCloseIcon.classList.add('close');
 
     const productImage = document.createElement('img');
@@ -326,7 +326,7 @@ const openProductInfo = (product)=>{
     })
 
     const addToCartIcon = document.createElement('img');
-    addToCartIcon.setAttribute('src', './icons/bt_add_to_cart.svg');
+    addToCartIcon.setAttribute('src', './assets/icons/bt_add_to_cart.svg');
     addToCartIcon.classList.add('shopping-btn');
     
     addToCartButton.append(addToCartIcon);
