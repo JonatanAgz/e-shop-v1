@@ -15,7 +15,7 @@
         <img src="./assets/icons/icon_menu.svg" alt="menu" class="burguer-icon" />
         <img src="./assets/icons/icon_search.png" alt="icono-buscar" class="icon-search icon-search-mobile">
         <div class="navbar-left">
-            <img src="./assets//logos/logo_bike_store.svg" alt="logo" class="logo" />
+            <a href="index.html"><img src="./assets/logos/logo_bike_store.svg" alt="logo" class="logo"/></a>
             <ul>
                 <li><a href="" class="icon-search"><img src="./assets/icons/icon_search.png" alt="icono-buscar" class=""></a></li>
                 <li><a href="index.html">Home</a></li>
@@ -48,16 +48,14 @@
         <div class="mobile-menu inactive">
             <div class="links">
                 <ul>
-                    <li><a href="" class="category">CATEGORIES</a></li>
-                    <li><a href="" class="category">Clothes</a></li>
-                    <li><a href="" class="category">Electronics</a></li>
-                    <li><a href="" class="category">Furnitures</a></li>
-                    <li><a href="" class="category">Toys</a></li>
-                    <li><a href="" class="category">Others</a></li>
+                    <li><a href="index.html" class="category">Home</a></li>
+                    <li><a href="store.html" class="category">Bikes</a></li>
+                    <li><a href="create-account.html" class="category">Sign up</a></li>
+                    <li><a href="login.html" class="category">Login</a></li>
                 </ul>
                 <ul>
-                    <li><a href="">My orders</a></li>
-                    <li><a href="">My account</a></li>
+                    <li><a href="my-orders.html">My orders</a></li>
+                    <li><a href="create-account.html">My account</a></li>
                 </ul>
                 <ul>
                     <li><a href="" class="email">jonatanagsz@gmail.com</a></li>
@@ -66,17 +64,37 @@
             </div>
         </div>
     </nav>
+
+    <!-- Carrito de compras -->
+    <aside class="shopping-cart inactive">
+        <div class="title-container">
+            <img src="./assets/icons/flechita.svg" alt="arrow" />
+            <p class="title">Shopping Cart</p>
+        </div>
+        <div class="my-order-content">
+            
+        </div>
+        <div class="order">
+            <p>
+                <span>Total</span>
+            </p>
+            <p class="total-price">$0</p>
+        </div>
+        <button class="btn-primary">Checkout</button>
+    </aside>
+
+    <!-- Contenido -->
     <main class="container">
-        <section class="parallax uno">
+        <section class="parallax first">
             <div class="text">
-                <a href="index.html"><h2>See all the products</h2></a>
+                <a href="store.html"><h2>See all the products</h2></a>
             </div>
         </section>
         <section class="parallax-text">
             <img src="./assets/logos/logo_bike_store.svg" alt="" class="parallax-logo">
             <p>We are a specialized cycling store, featuring several of the world's top bicycle brands with a wide variety of models where you can find the most suitable bike to meet your challenges and adventures</p>
         </section>
-        <section class="parallax dos">
+        <section class="parallax second">
             <div class="text">
                 <h2>Life is a journey... <br>Enjoy the ride</h2>
             </div>
@@ -85,7 +103,7 @@
             <h2>Our Passion</h2>
             <p>At BikeStore, we don't just sell bicycles; we live and breathe cycling. Every member of our team is a cycling enthusiast, from mountain trails to scenic road routes. This passion is reflected in the selection of products we offer and the service we provide</p>
         </section>
-        <section class="parallax tres">
+        <section class="parallax third">
             <div class="text">
                 <h2>Benefits</h2>
             </div>
